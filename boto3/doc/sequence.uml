@@ -1,0 +1,21 @@
+@startuml
+participant "Python Boto3" as Boto3
+participant "IAM" as IAM
+participant "S3" as S3
+
+Boto3 -> IAM: Authenticate with IAM credentials
+activate IAM
+IAM --> Boto3: Authentication successful
+deactivate IAM
+
+Boto3 -> S3: Create S3 bucket
+activate S3
+S3 --> Boto3: S3 bucket creation initiated
+deactivate S3
+
+Boto3 -> S3: Apply lifecycle rules to the bucket
+activate S3
+S3 --> Boto3: Lifecycle rules applied
+deactivate S3
+
+@enduml

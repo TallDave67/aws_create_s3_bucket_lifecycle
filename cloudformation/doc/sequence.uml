@@ -1,0 +1,40 @@
+@startuml
+participant "User" as User
+participant "AWS CLI" as AWS_CLI
+participant "CloudFormation" as CloudFormation
+participant "IAM" as IAM
+participant "S3" as S3
+
+User -> AWS_CLI: Run AWS CLI commands
+activate AWS_CLI
+
+AWS_CLI -> IAM: Authenticate with IAM credentials
+activate IAM
+IAM --> AWS_CLI: Authentication successful
+deactivate IAM
+
+AWS_CLI -> CloudFormation: Create stack with CloudFormation template file
+activate CloudFormation
+CloudFormation --> AWS_CLI: Stack creation initiated
+deactivate CloudFormation
+
+AWS_CLI --> User: Stack creation initiated
+
+note right of AWS_CLI: CloudFormation starts processing\nthe template file
+
+AWS_CLI -> CloudFormation: Provide template file
+activate CloudFormation
+
+CloudFormation -> S3: Create S3 bucket with lifecycle rules
+activate S3
+S3 --> CloudFormation: S3 bucket creation initiated
+deactivate S3
+
+CloudFormation --> AWS_CLI: S3 bucket creation completed
+
+deactivate CloudFormation
+
+AWS_CLI --> User: Stack creation and S3 bucket creation completed
+
+deactivate AWS_CLI
+@enduml
