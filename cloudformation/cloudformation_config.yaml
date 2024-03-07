@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Parameters:
+  BucketName:
+    Type: String  
+Resources:
+  MyBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: BUCKET_UNIQUE_NAME
+      LifecycleConfiguration:
+        Rules:
+          - Id: MoveToStandardIA
+            Status: Enabled
+            Transitions:
+              - TransitionInDays: 30
+                StorageClass: STANDARD_IA
+          - Id: MoveToGlacierInstantRetrieval
+            Status: Enabled
+            Transitions:
+              - TransitionInDays: 60
+                StorageClass: GLACIER

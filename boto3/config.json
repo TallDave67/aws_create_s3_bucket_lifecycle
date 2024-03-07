@@ -1,0 +1,35 @@
+{
+    "Region": "us-east-1",
+    "BucketBaseName": "MY_BUCKET_BASE_NAME",
+    "LifecycleConfiguration": {
+      "Rules": [
+        {
+          "ID": "MoveToStandardIA",
+          "Filter": {
+            "Prefix": ""
+          },
+          "Status": "Enabled",
+          "Transitions": [
+            {
+              "Days": 30,
+              "StorageClass": "STANDARD_IA"
+            }
+          ]
+        },
+        {
+          "ID": "MoveToGlacierInstantRetrieval",
+          "Filter": {
+            "Prefix": ""
+          },
+          "Status": "Enabled",
+          "Transitions": [
+            {
+              "Days": 60,
+              "StorageClass": "GLACIER"
+            }
+          ]
+        }
+      ]
+    }
+  }
+  
