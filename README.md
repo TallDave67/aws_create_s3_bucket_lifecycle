@@ -1,4 +1,4 @@
-# Create S3 Bucket with Lifecyle Rules
+# Create S3 Bucket with Lifecycle Rules
 
 Scripts to create an S3 bucket in AWS and apply Lifecycle rules.
 
